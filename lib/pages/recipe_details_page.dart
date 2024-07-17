@@ -98,8 +98,10 @@ class RecipeDetailsPage extends StatelessWidget {
                   ),
                 ),
                 SizedBox(
-                    height: 140,
+                    height: 150,
                     child: ListView.builder(
+                        shrinkWrap: true,
+                        padding: EdgeInsets.zero,
                         scrollDirection: Axis.vertical,
                         itemCount: recipe.ingredients.length,
                         itemBuilder: (context, index) {
@@ -120,6 +122,8 @@ class RecipeDetailsPage extends StatelessWidget {
                 SizedBox(
                     height: 150,
                     child: ListView.builder(
+                        shrinkWrap: true,
+                        padding: EdgeInsets.zero,
                         itemCount: recipe.instructions.length,
                         itemBuilder: (context, index) {
                           return Text(

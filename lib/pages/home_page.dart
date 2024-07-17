@@ -34,6 +34,23 @@ class _HomePageState extends State<HomePage> {
     }
   }
 
+  RecipeItemsSerch(String serch) async {
+    var res = await http
+        .get(Uri.parse('https://dummyjson.com/recipes/search?q=$serch'));
+    try {
+      if (res.statusCode == 200) {
+        var data = recipeModelFromJson(res.body);
+
+        setState(() {
+          recipes = data.recipes;
+          print(recipes);
+        });
+      }
+    } catch (e) {
+      print('Error: $e');
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -81,9 +98,9 @@ class _HomePageState extends State<HomePage> {
                             color: Colors.grey[100],
                             borderRadius: BorderRadius.circular(8),
                           ),
-                          child: const TextField(
-                            //onChanged: (value) => runFilter(value),
-                            decoration: InputDecoration(
+                          child: TextField(
+                            onChanged: (value) => RecipeItemsSerch(value),
+                            decoration: const InputDecoration(
                               prefixIcon: Icon(
                                 Icons.search,
                                 color: Colors.grey,
